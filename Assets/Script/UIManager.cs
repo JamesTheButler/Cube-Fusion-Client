@@ -14,6 +14,13 @@ public class UIManager : MonoBehaviour {
     public Text queueText;
     public GameObject buttonPrefab;
     public GameObject canvas;
+
+    public Sprite upImg;
+    public Sprite downImg;
+    public Sprite leftImg;
+    public Sprite rightImg;
+
+
     List<commands> commandList;
 
     void Start() {
@@ -69,16 +76,16 @@ public class UIManager : MonoBehaviour {
         switch (cmd)
         {
             case commands.UP:
-                button.GetComponentInChildren<Text>().text = "U";
+                button.GetComponentInChildren<Image>().sprite = upImg;
                 break;
             case commands.DOWN:
-                button.GetComponentInChildren<Text>().text = "D";
+                button.GetComponentInChildren<Image>().sprite = downImg;
                 break;
             case commands.RIGHT:
-                button.GetComponentInChildren<Text>().text = "R";
+                button.GetComponentInChildren<Image>().sprite = rightImg;
                 break;
             case commands.LEFT:
-                button.GetComponentInChildren<Text>().text = "L";
+                button.GetComponentInChildren<Image>().sprite = leftImg;
                 break;
         }
     }
