@@ -10,8 +10,9 @@ public class ClientNetwork : MonoBehaviour
         public string message;
     }
 
+    public int clientId;
     int port = 5555;
-    public string address;
+    public string address = "192.168.43.238";
 
     // The id we use to identify our messages and register the handler
     short messageID = 1000;
