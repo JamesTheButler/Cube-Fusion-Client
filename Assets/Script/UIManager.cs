@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour {
     public Sprite leftImg;
     public Sprite rightImg;
 
+    public ClientNetwork client;
+
 
     List<commands> commandList;
 
@@ -41,13 +43,20 @@ public class UIManager : MonoBehaviour {
         for(int j=0; j<canvas.transform.childCount; j++){
             Destroy(canvas.transform.GetChild(j).gameObject);
         }
+
+        queueText.text = serializeQueue();
+    }
+
+    public string serializeQueue()
+    {
         string s = "";
-        for (int i = 0; i<commandList.Count; i++)
+        for (int i = 0; i < commandList.Count; i++)
         {
             createButton(i, commandList[i]);
-            switch (commandList[i]) {
+            switch (commandList[i])
+            {
                 case commands.UP:
-                    s +="U";
+                    s += "U";
                     break;
                 case commands.DOWN:
                     s += "D";
@@ -60,11 +69,11 @@ public class UIManager : MonoBehaviour {
                     break;
             }
         }
-        queueText.text = s;
+        return s;
     }
 
     public void confirmQueue() {
-        Debug.LogError("not implemented yet");
+        client.SendQueue(serializeQueue());
     }
 
     private void createButton(int id, commands cmd)
