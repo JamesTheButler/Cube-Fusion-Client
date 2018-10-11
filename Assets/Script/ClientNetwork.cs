@@ -2,21 +2,20 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-
 public class ClientNetwork : MonoBehaviour
 {
-    public class DataMessage : MessageBase
-    {
+    public class DataMessage : MessageBase {
         public string message;
     }
 
-    public int clientId;
     int port = 5555;
-    public string address = "192.168.43.238";
+    public string ipAdress = "192.168.43.238";
+    public int clientId;
+    public UIManager uiMgr;
 
     // The id we use to identify our messages and register the handler
-    short messageID = 1000;
-    short queueID = 1001;
+    const short MESSAGE_ID = 1000;
+    const short QUEUE_ID = 1001;
 
     // The network client
     NetworkClient client;
@@ -39,14 +38,19 @@ public class ClientNetwork : MonoBehaviour
         // Register handlers
         RegisterHandlers();
 
+        // set connection image
+        uiMgr.setIsConnected(false);
+
         // Connect
-        client.Connect(address, port);
+        Debug.Log("ClientNetwork :: Trying to connect to server ("+ipAdress+", "+port+")");
+        client.Connect(ipAdress, port);
+
     }
 
     // Register the handlers
     void RegisterHandlers()
     {
-        client.RegisterHandler(messageID, OnMessageReceived);
+        client.RegisterHandler(MESSAGE_ID, OnMessageReceived);
         client.RegisterHandler(MsgType.Connect, OnConnected);
         client.RegisterHandler(MsgType.Disconnect, OnDisconnected);
     }
@@ -56,14 +60,17 @@ public class ClientNetwork : MonoBehaviour
         Debug.Log("Connected to server");
         DataMessage msg = new DataMessage();
         msg.message = "Hello server!";
-        
-        client.Send(messageID, msg);
+        uiMgr.setIsConnected(true);
+
+        client.Send(MESSAGE_ID, msg);
     }
 
     //Disconnected from server
     void OnDisconnected(NetworkMessage message)
     {
         Debug.Log("Disconnected from server");
+        uiMgr.setIsConnected(false);
+
     }
 
     // Message from the server
@@ -78,6 +85,6 @@ public class ClientNetwork : MonoBehaviour
     {
         DataMessage msg = new DataMessage();
         msg.message = queue;
-        client.Send(queueID, msg);
+        client.Send(QUEUE_ID, msg);
     }
 }

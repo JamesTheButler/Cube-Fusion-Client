@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour {
     public Sprite rightImg;
 
     public ClientNetwork client;
-
+    public Image isConnectedImg;
 
     List<commands> commandList;
 
@@ -110,5 +110,13 @@ public class UIManager : MonoBehaviour {
     {
         commandList.Clear();
         displayQueue();
+    }
+
+    public void setIsConnected(bool isConnected) {
+        if (isConnected)
+            isConnectedImg.color = Color.green;
+        else
+            isConnectedImg.color = Color.red;
+
     }
 }
