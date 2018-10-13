@@ -11,7 +11,6 @@ public enum commands{
 }
 
 public class UIManager : MonoBehaviour {
-    public Text queueText;
     public GameObject buttonPrefab;
     public GameObject canvas;
 
@@ -44,7 +43,9 @@ public class UIManager : MonoBehaviour {
             Destroy(canvas.transform.GetChild(j).gameObject);
         }
 
-        queueText.text = serializeQueue();
+        for (int i = 0; i < commandList.Count; i++) {
+            createButton(i, commandList[i]);
+        }
     }
 
     public string serializeQueue()
@@ -52,7 +53,6 @@ public class UIManager : MonoBehaviour {
         string s = "";
         for (int i = 0; i < commandList.Count; i++)
         {
-            createButton(i, commandList[i]);
             switch (commandList[i])
             {
                 case commands.UP:
@@ -76,12 +76,10 @@ public class UIManager : MonoBehaviour {
         client.SendQueue(serializeQueue());
     }
 
-    private void createButton(int id, commands cmd)
-    {
+    private void createButton(int id, commands cmd) {
         GameObject button = Instantiate(buttonPrefab, canvas.transform);
         button.GetComponent<RectTransform>().position = new Vector3( 20f+id*220, 20f, 0);
         button.GetComponent<SelfDelete>().id = id;
-        Debug.Log(button.GetComponent<SelfDelete>().id);
         switch (cmd)
         {
             case commands.UP:
@@ -99,15 +97,13 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    public void deleteItemFromList(int id)
-    {
+    public void deleteItemFromList(int id) {
         commandList.RemoveAt(id);
         displayQueue();
 
     }
 
-    public void deletequeue()
-    {
+    public void deletequeue() {
         commandList.Clear();
         displayQueue();
     }
