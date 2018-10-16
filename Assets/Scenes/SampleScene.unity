@@ -1148,6 +1148,7 @@ MonoBehaviour:
   ipAdress: 192.168.43.238
   clientId: 0
   uiMgr: {fileID: 306129098}
+  deleteQueue: {fileID: 103686933}
 --- !u!4 &1137511838
 Transform:
   m_ObjectHideFlags: 0

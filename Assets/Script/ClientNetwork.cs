@@ -12,6 +12,7 @@ public class ClientNetwork : MonoBehaviour
     public string ipAdress = "192.168.43.238";
     public int clientId;
     public UIManager uiMgr;
+    public DeleteQueue deleteQueue;
 
     // The id we use to identify our messages and register the handler
     const short MESSAGE_ID = 1000;
@@ -69,9 +70,14 @@ public class ClientNetwork : MonoBehaviour
         {
             uiMgr.CubeColor(Color.yellow);
         }
-        else if(objectMessage.message == "3")
+        else if (objectMessage.message == "3")
         {
             uiMgr.EnablePlay(true);
+        }
+        else if (objectMessage.message == "4")
+        {
+            uiMgr.EnablePlay(true);
+            deleteQueue.deleteQueue();
         }
         else if (objectMessage.message == "0")
         {
