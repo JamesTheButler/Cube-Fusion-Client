@@ -28,6 +28,7 @@ public class ClientNetwork : MonoBehaviour
 
     void CreateClient()
     {
+        uiMgr.EnablePlay(false);
         client = new NetworkClient();
 
         // Configuration
@@ -67,6 +68,10 @@ public class ClientNetwork : MonoBehaviour
         else if (objectMessage.message == "2")
         {
             uiMgr.CubeColor(Color.yellow);
+        }
+        else if(objectMessage.message == "3")
+        {
+            uiMgr.EnablePlay(true);
         }
         else if (objectMessage.message == "0")
         {

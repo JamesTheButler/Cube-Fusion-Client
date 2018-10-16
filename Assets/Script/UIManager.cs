@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour {
     public Sprite stopImg;
 
     public Image cubeImage;
+    public Button playButton;
 
     public ClientNetwork client;
     public Image isConnectedImg;
@@ -82,6 +83,12 @@ public class UIManager : MonoBehaviour {
 
     public void confirmQueue() {
         client.SendQueue(serializeQueue());
+        EnablePlay(false);
+    }
+
+    public void EnablePlay(bool enable)
+    {
+        playButton.interactable = enable;
     }
 
     private void createButton(int id, commands cmd) {
