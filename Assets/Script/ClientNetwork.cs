@@ -16,6 +16,7 @@ public class ClientNetwork : MonoBehaviour
     // The id we use to identify our messages and register the handler
     const short MESSAGE_ID = 1000;
     const short QUEUE_ID = 1001;
+    const short SETUP_ID = 1002;
 
     // The network client
     NetworkClient client;
@@ -50,9 +51,23 @@ public class ClientNetwork : MonoBehaviour
     // Register the handlers
     void RegisterHandlers()
     {
+        client.RegisterHandler(SETUP_ID, SetupPlayer);
         client.RegisterHandler(MESSAGE_ID, OnMessageReceived);
         client.RegisterHandler(MsgType.Connect, OnConnected);
         client.RegisterHandler(MsgType.Disconnect, OnDisconnected);
+    }
+
+    void SetupPlayer(NetworkMessage netMessage)
+    {
+        var objectMessage = netMessage.ReadMessage<DataMessage>();
+        if (objectMessage.message == "1")
+        {
+            uiMgr.CubeColor(Color.yellow);
+        }
+        else if (objectMessage.message == "2")
+        {
+            uiMgr.CubeColor(Color.green);
+        }
     }
 
     void OnConnected(NetworkMessage message)

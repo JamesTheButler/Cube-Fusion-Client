@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour {
     public Sprite leftImg;
     public Sprite rightImg;
 
+    public Image cubeImage;
+
     public ClientNetwork client;
     public Image isConnectedImg;
 
@@ -114,5 +116,10 @@ public class UIManager : MonoBehaviour {
         else
             isConnectedImg.color = Color.red;
 
+    }
+
+    public void CubeColor(Color color)
+    {
+        cubeImage.color = color;
     }
 }
