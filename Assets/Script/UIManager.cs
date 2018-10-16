@@ -7,7 +7,8 @@ public enum commands{
     UP,
     RIGHT,
     DOWN,
-    LEFT
+    LEFT,
+    NONE
 }
 
 public class UIManager : MonoBehaviour {
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour {
     public Sprite downImg;
     public Sprite leftImg;
     public Sprite rightImg;
+    public Sprite stopImg;
 
     public Image cubeImage;
 
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour {
     public void addDownCmd() { addCommandToList(commands.DOWN); }
     public void addRightCmd() { addCommandToList(commands.RIGHT); }
     public void addLeftCmd() { addCommandToList(commands.LEFT); }
+    public void addStopCmd() { addCommandToList(commands.NONE); }
 
     public void displayQueue() {
         for(int j=0; j<canvas.transform.childCount; j++){
@@ -69,6 +72,9 @@ public class UIManager : MonoBehaviour {
                 case commands.LEFT:
                     s += "L";
                     break;
+                case commands.NONE:
+                    s += "W";
+                    break;
             }
         }
         return s;
@@ -80,7 +86,7 @@ public class UIManager : MonoBehaviour {
 
     private void createButton(int id, commands cmd) {
         GameObject button = Instantiate(buttonPrefab, canvas.transform);
-        button.GetComponent<RectTransform>().position = new Vector3( 20f+id*220, 20f, 0);
+        button.GetComponent<RectTransform>().position = new Vector3( 20f+id*180, 20f, 0);
         button.GetComponent<SelfDelete>().id = id;
         switch (cmd)
         {
@@ -95,6 +101,9 @@ public class UIManager : MonoBehaviour {
                 break;
             case commands.LEFT:
                 button.GetComponentInChildren<Image>().sprite = leftImg;
+                break;
+            case commands.NONE:
+                button.GetComponentInChildren<Image>().sprite = stopImg;
                 break;
         }
     }

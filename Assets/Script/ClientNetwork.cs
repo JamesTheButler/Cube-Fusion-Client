@@ -62,11 +62,15 @@ public class ClientNetwork : MonoBehaviour
         var objectMessage = netMessage.ReadMessage<DataMessage>();
         if (objectMessage.message == "1")
         {
-            uiMgr.CubeColor(Color.yellow);
+            uiMgr.CubeColor(Color.green);
         }
         else if (objectMessage.message == "2")
         {
-            uiMgr.CubeColor(Color.green);
+            uiMgr.CubeColor(Color.yellow);
+        }
+        else if (objectMessage.message == "0")
+        {
+            uiMgr.CubeColor(Color.white);
         }
     }
 
@@ -84,6 +88,7 @@ public class ClientNetwork : MonoBehaviour
     void OnDisconnected(NetworkMessage message)
     {
         Debug.Log("Disconnected from server");
+        uiMgr.CubeColor(Color.white);
         uiMgr.setIsConnected(false);
 
     }
