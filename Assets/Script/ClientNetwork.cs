@@ -13,6 +13,7 @@ public class ClientNetwork : MonoBehaviour
     public int clientId;
     public UIManager uiMgr;
     public DeleteQueue deleteQueue;
+    private CubeLoader cubeLoader;
 
     // The id we use to identify our messages and register the handler
     const short MESSAGE_ID = 1000;
@@ -31,7 +32,7 @@ public class ClientNetwork : MonoBehaviour
     {
         uiMgr.EnablePlay(false);
         client = new NetworkClient();
-
+        cubeLoader = GetComponent<CubeLoader>();
         // Configuration
         var config = new ConnectionConfig();
         config.AddChannel(QosType.ReliableFragmented);
@@ -64,11 +65,13 @@ public class ClientNetwork : MonoBehaviour
         var objectMessage = netMessage.ReadMessage<DataMessage>();
         if (objectMessage.message == "1")
         {
-            uiMgr.CubeColor(Color.green);
+            uiMgr.setCubeColor(Color.green);
+            cubeLoader.showModel(1);
         }
         else if (objectMessage.message == "2")
         {
-            uiMgr.CubeColor(Color.yellow);
+            uiMgr.setCubeColor(Color.yellow);
+            cubeLoader.showModel(2);
         }
         else if (objectMessage.message == "3")
         {
@@ -81,7 +84,8 @@ public class ClientNetwork : MonoBehaviour
         }
         else if (objectMessage.message == "0")
         {
-            uiMgr.CubeColor(Color.white);
+            uiMgr.setCubeColor(Color.white);
+            cubeLoader.showModel(0);
         }
     }
 
@@ -99,7 +103,8 @@ public class ClientNetwork : MonoBehaviour
     void OnDisconnected(NetworkMessage message)
     {
         Debug.Log("Disconnected from server");
-        uiMgr.CubeColor(Color.white);
+        uiMgr.setCubeColor(Color.white);
+        cubeLoader.showModel(0);
         uiMgr.setIsConnected(false);
 
     }

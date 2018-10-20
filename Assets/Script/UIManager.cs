@@ -134,7 +134,7 @@ public class UIManager : MonoBehaviour {
 
     }
 
-    public void CubeColor(Color color)
+    public void setCubeColor(Color color)
     {
         cubeImage.color = color;
     }
