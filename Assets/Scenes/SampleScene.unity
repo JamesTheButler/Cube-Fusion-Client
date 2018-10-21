@@ -593,9 +593,9 @@ MonoBehaviour:
   downImg: {fileID: 21300000, guid: de41ce4707e607749b53f833a94b4136, type: 3}
   leftImg: {fileID: 21300000, guid: 2ad97e8c65af0aa498d8fe7ecc8a5b73, type: 3}
   rightImg: {fileID: 21300000, guid: 54b0d348c5e67ee44a68636865037b01, type: 3}
-  stopImg: {fileID: 21300000, guid: 526db928490b1d545a8b10705ae939ec, type: 3}
-  cubeImage: {fileID: 98922199}
-  playButton: {fileID: 1709438420}
+  stopImg: {fileID: 0}
+  cubeImage: {fileID: 0}
+  playButton: {fileID: 0}
   client: {fileID: 1137511837}
   isConnectedImg: {fileID: 621981580}
 --- !u!1 &433429276
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   ipAdress: 192.168.43.69
   clientId: 0
   uiMgr: {fileID: 306129098}
-  deleteQueue: {fileID: 103686933}
+  deleteQueue: {fileID: 0}
 --- !u!4 &1137511838
 Transform:
   m_ObjectHideFlags: 0
@@ -2090,8 +2090,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5023.502, y: 93}
-  m_SizeDelta: {x: 10047, y: 187}
+  m_AnchoredPosition: {x: 7500, y: 93.5}
+  m_SizeDelta: {x: 15000, y: 187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1959288021
 MonoBehaviour:
