@@ -125,17 +125,4 @@ public class UIManager : MonoBehaviour {
         commandList.Clear();
         displayQueue();
     }
-
-    public void setIsConnected(bool isConnected) {
-        if (isConnected)
-            isConnectedImg.color = Color.green;
-        else
-            isConnectedImg.color = Color.red;
-
-    }
-
-    public void setCubeColor(Color color)
-    {
-        cubeImage.color = color;
-    }
 }

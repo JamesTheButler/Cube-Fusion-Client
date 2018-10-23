@@ -41,10 +41,7 @@ public class ClientNetwork : MonoBehaviour
 
         // Register handlers
         RegisterHandlers();
-
-        // set connection image
-        uiMgr.setIsConnected(false);
-
+        
         // Connect
         Debug.Log("ClientNetwork :: Trying to connect to server ("+ipAdress+", "+port+")");
         client.Connect(ipAdress, port);
@@ -65,12 +62,10 @@ public class ClientNetwork : MonoBehaviour
         var objectMessage = netMessage.ReadMessage<DataMessage>();
         if (objectMessage.message == "1")
         {
-            uiMgr.setCubeColor(Color.green);
             cubeLoader.showModel(1);
         }
         else if (objectMessage.message == "2")
         {
-            uiMgr.setCubeColor(Color.yellow);
             cubeLoader.showModel(2);
         }
         else if (objectMessage.message == "3")
@@ -84,7 +79,6 @@ public class ClientNetwork : MonoBehaviour
         }
         else if (objectMessage.message == "0")
         {
-            uiMgr.setCubeColor(Color.white);
             cubeLoader.showModel(0);
         }
     }
@@ -94,8 +88,6 @@ public class ClientNetwork : MonoBehaviour
         Debug.Log("Connected to server");
         DataMessage msg = new DataMessage();
         msg.message = "Hello server!";
-        uiMgr.setIsConnected(true);
-
         client.Send(MESSAGE_ID, msg);
     }
 
@@ -103,10 +95,7 @@ public class ClientNetwork : MonoBehaviour
     void OnDisconnected(NetworkMessage message)
     {
         Debug.Log("Disconnected from server");
-        uiMgr.setCubeColor(Color.white);
         cubeLoader.showModel(0);
-        uiMgr.setIsConnected(false);
-
     }
 
     // Message from the server
