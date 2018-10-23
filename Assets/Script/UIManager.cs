@@ -14,23 +14,27 @@ public enum commands{
 public class UIManager : MonoBehaviour {
     public GameObject buttonPrefab;
     public GameObject canvas;
+    public GameObject scrollpanel;
 
     public Sprite upImg;
     public Sprite downImg;
     public Sprite leftImg;
     public Sprite rightImg;
     public Sprite stopImg;
-
-    public Image cubeImage;
+    
     public Button playButton;
 
     public ClientNetwork client;
-    public Image isConnectedImg;
+
+    private float gap, startX, buttonWidth;
 
     List<commands> commandList;
 
     void Start() {
         commandList = new List<commands>();
+        gap = 10f;
+        startX = gap;
+        buttonWidth = ((RectTransform)buttonPrefab.gameObject.transform).rect.width;
     }
 
     private void addCommandToList(commands cmd) {
@@ -52,6 +56,9 @@ public class UIManager : MonoBehaviour {
         for (int i = 0; i < commandList.Count; i++) {
             createButton(i, commandList[i]);
         }
+
+        //resize scroll panel
+        ((RectTransform)scrollpanel.transform).sizeDelta = new Vector2(commandList.Count * (buttonWidth + gap) + startX, startX * 2 + buttonWidth);
     }
 
     public string serializeQueue()
@@ -93,7 +100,8 @@ public class UIManager : MonoBehaviour {
 
     private void createButton(int id, commands cmd) {
         GameObject button = Instantiate(buttonPrefab, canvas.transform);
-        button.GetComponent<RectTransform>().position = new Vector3( 20f+id*180, 20f, 0);
+       
+        button.GetComponent<RectTransform>().position = new Vector3(startX+id*(buttonWidth+gap), gap, 0);
         button.GetComponent<SelfDelete>().id = id;
         switch (cmd)
         {
