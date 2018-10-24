@@ -96,6 +96,7 @@ public class ClientNetwork : MonoBehaviour
     {
         Debug.Log("Disconnected from server");
         cubeLoader.showModel(0);
+        CreateClient();
     }
 
     // Message from the server
