@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b2d3696f68fcb48898282fa5941b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAdress: 192.168.43.238
+  ipAdress: 192.168.1.69
   clientId: 0
   uiMgr: {fileID: 306129098}
   deleteQueue: {fileID: 103686933}
