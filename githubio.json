@@ -1,3 +1,4 @@
-{"is_main_project" : "false",
-"project_name" : "Cube Fusion",
-"href_name" : "Client"}
+{
+	"project_id" : "CubeFusion",
+	"href_name" : "Client"
+}
